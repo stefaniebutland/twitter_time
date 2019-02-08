@@ -1,0 +1,26 @@
+**This is my first [RMarkdown](https://ropensci.org) file**
+
+```{r}
+# load packages -----
+library(tidyverse)
+library(here)
+library(visdat)
+
+# load data from csv ------
+# metrics is an "object"
+# here() starts at /Users/stefaniebutland/R/tweets_ropensci so any files pointed to can be relative to that
+# careful: read_csv is tidyverse; read.csv is not
+metrics <- read_csv(here("data", "twitter_metrics_monthly_rOpenSci.csv"))
+
+# exploring twitter metrics data -------
+# View (metrics) gives preview of data frame. Same can be achieved by clicking in metrics df in the Environment window
+View(metrics)
+
+# use visdat pakage to visualize missing data
+vis_dat(metrics)
+
+# ggplot2 line plot of tweets vs mentions, year vs mentions or new followers
+ggplot(data = metrics, aes(x=year, y=mentions)) +
+  geom_point()
+```  
+  
