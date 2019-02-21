@@ -3,6 +3,7 @@ library(tidyverse)
 library(here)
 library(usethis)
 library(visdat)
+library(ggbeeswarm)
 
 usethis::use_github()
 
@@ -41,3 +42,35 @@ ggplot(data = metrics, aes(x=new_followers, y=mentions)) +
 # ideally would do this with month/year labelled on x-axis
 ggplot(data = metrics, aes(x=37:1, y=mentions)) +
   geom_point()
+
+glimpse(metrics)
+
+# turn one column into 2 using separate
+
+
+# create new column by uniting 2 other columns using unite
+metrics %>% unite(month_year, month:year, remove = FALSE)
+
+# calculate a new column using mutate
+# this example gets difference in number of followers each month
+followersgrowth <- metrics %>% mutate(followersdiff = followers - lag(followers))
+
+# count number of observations in each year; expect 12
+metrics %>%
+  group_by(year) %>%
+  summarise(obs = n())
+
+# try jitter instead of point
+# in this case of only 12 obs per year, jitter isn't needed
+ggplot(data = metrics, aes(x=year, y=mentions)) +
+  geom_jitter()
+
+ggplot(data = metrics, aes(x=year, y=mentions)) +
+  geom_jitter()
+
+# trying beeswarm, but again, not needed for this data
+ggplot(data = metrics, aes(x=year, y=mentions)) +
+  geom_beeswarm()
+
+# left off at https://rladiessydney.org/post/2018/12/20/vizwhiz-1/ "1.2 Using colour to plot bug levels by site"
+
