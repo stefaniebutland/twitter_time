@@ -29,7 +29,7 @@ metrics <- read_csv(here::here("data", "2019-03-02_twitter_metrics_monthly_rOpen
 # View (metrics) gives preview of data frame. Same can be achieved by clicking in metrics df in the Environment window
 View(metrics)
 
-# use visdat pakage to visualize missing data
+# use visdat package to visualize missing data
 vis_dat(metrics)
 
 # ggplot2 line plot of tweets vs mentions, date vs mentions or new followers
