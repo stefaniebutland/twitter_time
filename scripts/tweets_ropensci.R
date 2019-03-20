@@ -47,6 +47,9 @@ ggplot(data = metrics, aes(x=date, y=new_followers)) +
 ggplot(data = metrics, aes(x=date, y=tweets)) +
   geom_line()
 
+ggplot(data = metrics, aes(x=date, y=tweets)) +
+  geom_point()
+
 ggplot(data = metrics, aes(x=date, y=tweet_impressions)) +
   geom_line()
 
