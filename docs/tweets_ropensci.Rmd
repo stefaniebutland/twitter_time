@@ -3,6 +3,7 @@
 ```{r}
 # load packages -----
 library(tidyverse)
+library(knitr)
 library(here)
 library(usethis)
 library(visdat)
@@ -24,8 +25,18 @@ metrics <- read_csv(here::here("data", "2019-03-02_twitter_metrics_monthly_rOpen
 
 # exploring twitter metrics data -------
 # View(metrics) gives preview of data frame. Same can be achieved by clicking in metrics df in the Environment window
+# How do I show the metrics data frame in the Rmd -> html output?
 View(metrics)
+```
 
+```{r echo = FALSE, results = 'asis'}
+knitr::kable(metrics, caption = "Metrics table")
+```
+
+
+
+
+```{r}
 # use visdat pakage to visualize missing data
 # this was the first package I tried, initially just for fun, after reading in csv
 vis_dat(metrics)
@@ -35,28 +46,28 @@ vis_dat(metrics)
 ggplot(data = metrics, aes(x=date, y=followers)) +
   geom_point()
 
-ggplot(data = metrics, aes(x=date, y=followers)) +
-   geom_line()
+# ggplot(data = metrics, aes(x=date, y=followers)) +
+#   geom_line()
 
-ggplot(data = metrics, aes(x=date, y=new_followers)) +
-  geom_line()
-
-ggplot(data = metrics, aes(x=date, y=tweets)) +
-  geom_line()
-
-ggplot(data = metrics, aes(x=date, y=tweets)) +
-  geom_point()
-
-ggplot(data = metrics, aes(x=date, y=tweet_impressions)) +
-  geom_line()
-
-ggplot(data = metrics, aes(x=date, y=profile_visits)) +
-  geom_line() 
-
-ggplot(data = metrics, aes(x=date, y=mentions)) +
-  geom_line()
-
-ggplot(data = metrics, aes(x=tweets, y=mentions)) +
-  geom_line()
+# ggplot(data = metrics, aes(x=date, y=new_followers)) +
+#   geom_line()
+# 
+# ggplot(data = metrics, aes(x=date, y=tweets)) +
+#   geom_line()
+# 
+# ggplot(data = metrics, aes(x=date, y=tweets)) +
+#   geom_point()
+# 
+# ggplot(data = metrics, aes(x=date, y=tweet_impressions)) +
+#   geom_line()
+# 
+# ggplot(data = metrics, aes(x=date, y=profile_visits)) +
+#   geom_line() 
+# 
+# ggplot(data = metrics, aes(x=date, y=mentions)) +
+#   geom_line()
+# 
+# ggplot(data = metrics, aes(x=tweets, y=mentions)) +
+#   geom_line()
 ```  
   
