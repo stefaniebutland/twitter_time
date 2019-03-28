@@ -1,5 +1,33 @@
 # Learning R by Collecting and Plotting Twitter Data from rOpenSci
 
+## Motivation
+
+When I was interviewing for my job in August 2016, I was impressed that rOpenSci had over 11,000 followers on Twitter. In 2017, I started collecting rOpenSci Twitter data monthly in order to build up a dataset for which I had no specific purpose. By January 2019, rOpenSci had over 22,000 followers and I had at least 24 months of data so I wanted to plot the increase over time, as well as plotting other metrics provided by Twitter. 
+
+**Actual motivation:** After two years working with the rOpenSci community I started feeling much more strongly like I was missing some of the essence of what people were talking about in their blog posts, or getting excited about when new packages like `visdat` or `skimr` were released. Learning some R by learning how to make simple plots of Twitter data over time seemed like the ideal starter project for a Community Manager. 
+
+## Objective 
+
+Explore rOpenSci Twitter metrics by plotting data for number of followers, mentions, tweets etc over time.
+
+## Data Collection
+
+I collected data manually from https://analytics.twitter.com/user/rOpenSci/home once a month near the first of each month and added it to the file `twitter_metrics_monthly_rOpenSci.csv` (note the `date` column was added/modified to work with R - need to link to the new format file). (this does not apply to the data I'm using here: Most Twitter data for a user can be exported in monthly datasets that are accessible for about six months in the past.)
+
+- commit_date: date of GitHub commit of csv file with new data.
+- date: 1st of each month, starting 2016-02-01 
+- followers: Number of followers, manually copied from https://twitter.com/rOpenSci. Number of followers is the only piece of data in this file that is only available from Twitter at the time you access the site i.e. it is not made available with the rest of the data in this dataset. Thus, there are NAs when the number of followers was not recorded near the first of the month, or prior to the time I started to collect this data. 
+- new_followers: Number of new followers you gained (equals gross new followers; does not account for followers lost)
+- tweets: Number of times you Tweeted
+- tweet_impressions: Number of times users are served your Tweet in timeline, search results, or from your profile
+- profile visits: Number of times users visited your profile page
+- mentions: Number of times your \@username was mentioned in Tweets
+
+Example shown in screenshot.
+
+![](https://i.imgur.com/f65Y0pD.png)
+
+
 ```{r}
 # load packages -----
 library(tidyverse)
