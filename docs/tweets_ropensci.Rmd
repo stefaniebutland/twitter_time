@@ -1,4 +1,5 @@
-# Learning R by Collecting and Plotting Twitter Data from rOpenSci
+# Community Manager Joins Her Community
+## Learning R by Collecting and Plotting rOpenSci Twitter Data 
 
 ## Motivation
 
@@ -27,8 +28,8 @@ Example shown in screenshot.
 
 ![](https://i.imgur.com/f65Y0pD.png)
 
-
-```{r}
+### Load Packages
+```{r load pkgs, message=FALSE, collapse=TRUE}
 # load packages -----
 library(tidyverse)
 library(knitr)
@@ -38,48 +39,74 @@ library(visdat)
 library(lubridate)
 
 usethis::use_github()
+```
 
+### Read csv of Twitter data
+```{r read_csv, echo=TRUE, message=FALSE, results='hide'}
 # load data from csv ------
 # careful: read_csv is tidyverse; read.csv is not
 # metrics is an "object"
 
 # > here::here()
 # [1] "/Users/stefaniebutland/GitHub/stefaniebutland/twitter_time"
-# here() starts at /Users/stefaniebutland/GitHub/stefaniebutland/twitter_time so any files pointed to can be relative to that
-# note: I learned that lubridate::here() masked here::here() so need to call specific function within the package to avoid errors
 
-# working with 2019-03-02 correctly formatted twitter data csv file
+# I learned the hard way that lubridate::here() masked here::here() so need to call specific function within the package to avoid errors
+
 metrics <- read_csv(here::here("data", "2019-03-02_twitter_metrics_monthly_rOpenSci.csv"))
+```
 
+```{r view_metrics, eval=FALSE, message=FALSE, include=FALSE, results='hide'}
 # exploring twitter metrics data -------
 # View(metrics) gives preview of data frame. Same can be achieved by clicking in metrics df in the Environment window
 # How do I show the metrics data frame in the Rmd -> html output?
-View(metrics)
-```
-
-```{r echo = FALSE, results = 'asis'}
-knitr::kable(metrics, caption = "Metrics table")
+# View(metrics)
 ```
 
 
+### Display table of Twitter data
+```{r print_table, echo=TRUE}
+knitr::kable(metrics, caption = "Twitter metrics table")
+```
 
 
-```{r}
-# use visdat pakage to visualize missing data
-# this was the first package I tried, initially just for fun, after reading in csv
+### Try `visdat` magic
+
+```{r try_visdat, echo=TRUE}
+# use visdat package to visualize missing data
+# this was the first package I tried after reading in csv, initially just for fun
 vis_dat(metrics)
+```
 
+### This is what I came for
+```{r plot_followers, echo=TRUE}
 # use ggplot2 to make point or line plots of date vs tweets, mentions, new followers etc
 # followers column is the only one that is not 100% objectve, since it is not archived by twitter analytics the way mentions etc are
 ggplot(data = metrics, aes(x=date, y=followers)) +
   geom_point()
+```
+Number of rOpenSci followers on Twitter has increased steadily since September 2016.
 
-# ggplot(data = metrics, aes(x=date, y=followers)) +
-#   geom_line()
+```{r plot_mentions, echo=TRUE}
+ggplot(data = metrics, aes(x=date, y=mentions)) +
+  geom_point()
+```
 
-# ggplot(data = metrics, aes(x=date, y=new_followers)) +
-#   geom_line()
-# 
+```{r plot_tweet_impressions, echo=TRUE}
+ggplot(data = metrics, aes(x=date, y=tweet_impressions)) +
+  geom_point()
+```
+
+```{r plot_followers_vs_tweet_impressions, echo=TRUE}
+ggplot(data = metrics, aes(x=followers, y=tweet_impressions)) +
+  geom_point()
+```
+
+```{r plot_tweets_vs_tweet_impressions, echo=TRUE}
+ggplot(data = metrics, aes(x=tweets, y=tweet_impressions)) +
+  geom_point()
+```
+
+``` {r leftovers, echo=FALSE}
 # ggplot(data = metrics, aes(x=date, y=tweets)) +
 #   geom_line()
 # 
@@ -97,5 +124,6 @@ ggplot(data = metrics, aes(x=date, y=followers)) +
 # 
 # ggplot(data = metrics, aes(x=tweets, y=mentions)) +
 #   geom_line()
-```  
+```
+
   
