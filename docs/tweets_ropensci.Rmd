@@ -1,11 +1,12 @@
-# Community Manager Joins Her Community
-## Learning R by Collecting and Plotting rOpenSci Twitter Data 
+# Community Manager Joins Her Community: Learning R by Collecting and Plotting rOpenSci Twitter Data 
 
 ## Motivation
 
-When I was interviewing for my job in August 2016, I was impressed that rOpenSci had over 11,000 followers on Twitter. In 2017, I started collecting rOpenSci Twitter data monthly in order to build up a dataset for which I had no specific purpose. By January 2019, rOpenSci had over 22,000 followers and I had at least 24 months of data so I wanted to plot the increase over time, as well as plotting other metrics provided by Twitter. 
+When I was interviewing for my job in August 2016, I was impressed that rOpenSci had over 11,000 followers on Twitter. In 2017, I started collecting rOpenSci Twitter data monthly in order to build up a dataset for which I had no specific purpose. By January 2019, rOpenSci had over 22,000 followers and I had at least 24 months of data so I wanted to plot the increase over time, as well as plotting other data provided by Twitter. 
 
-**Actual motivation:** After two years working with the rOpenSci community I started feeling much more strongly like I was missing some of the essence of what people were talking about in their blog posts, or getting excited about when new packages like `visdat` or `skimr` were released. Learning some R by learning how to make simple plots of Twitter data over time seemed like the ideal starter project for a Community Manager. 
+**Actual motivation:** After two years working with the rOpenSci community I started feeling more strongly like I was missing the essence of what people were talking about in their blog posts, or getting excited about when new packages like `visdat` or `skimr` were released. Like I'm representing a community that I'm not a part of. Learning some R by learning how to make simple plots of Twitter data over time seemed like the ideal starter project for a Community Manager. 
+
+To keep myself motivated, I started a local code co-learning group in January 2019 where I work on this once a week, after work hours.
 
 ## Objective 
 
@@ -13,21 +14,22 @@ Explore rOpenSci Twitter metrics by plotting data for number of followers, menti
 
 ## Data Collection
 
-I collected data manually from https://analytics.twitter.com/user/rOpenSci/home once a month near the first of each month and added it to the file `twitter_metrics_monthly_rOpenSci.csv` (note the `date` column was added/modified to work with R - need to link to the new format file). (this does not apply to the data I'm using here: Most Twitter data for a user can be exported in monthly datasets that are accessible for about six months in the past.)
+I collected data manually from https://analytics.twitter.com/user/rOpenSci/home once a month near the first of each month and added it to the file `twitter_metrics_monthly_rOpenSci.csv`. This file contains:
 
 - commit_date: date of GitHub commit of csv file with new data.
 - date: 1st of each month, starting 2016-02-01 
-- followers: Number of followers, manually copied from https://twitter.com/rOpenSci. Number of followers is the only piece of data in this file that is only available from Twitter at the time you access the site i.e. it is not made available with the rest of the data in this dataset. Thus, there are NAs when the number of followers was not recorded near the first of the month, or prior to the time I started to collect this data. 
+- followers: Number of followers, manually copied from https://twitter.com/rOpenSci. Number of followers is the only piece of data in this file that is only available from Twitter at the time you access the site i.e. it is not made available with the rest of the data in this dataset. Thus, there are NAs for dates prior to the time I started to collect this data or for dates before I realized this data was ephemeral. 
 - new_followers: Number of new followers you gained (equals gross new followers; does not account for followers lost)
-- tweets: Number of times you Tweeted
-- tweet_impressions: Number of times users are served your Tweet in timeline, search results, or from your profile
+- tweets: Number of times you tweeted
+- tweet_impressions: Number of times users are served your tweet in timeline, search results, or from your profile
 - profile visits: Number of times users visited your profile page
-- mentions: Number of times your \@username was mentioned in Tweets
-
-Example shown in screenshot.
+- mentions: Number of times your \@username was mentioned in tweets
 
 ![](https://i.imgur.com/f65Y0pD.png)
 
+**Figure**. Screenshot showing example of Twitter analytics [data source](https://analytics.twitter.com/user/rOpenSci/home).
+
+## Data Analysis
 ### Load Packages
 ```{r load pkgs, message=FALSE, collapse=TRUE}
 # load packages -----
@@ -84,6 +86,7 @@ vis_dat(metrics)
 ggplot(data = metrics, aes(x=date, y=followers)) +
   geom_point()
 ```
+
 Number of rOpenSci followers on Twitter has increased steadily since September 2016.
 
 ```{r plot_mentions, echo=TRUE}
@@ -126,4 +129,8 @@ ggplot(data = metrics, aes(x=tweets, y=tweet_impressions)) +
 #   geom_line()
 ```
 
+## Mission Accomplished
+I've managed to make plots of rOpenSci Twitter data over time in an RMarkdown file knit to html, working from an RStudio `.proj`, with RStudio connected to my GitHub, and gh-pages enabled so I can share this accomplishment. 
+
+Next steps will be to write about the process and the resources I used to learn. 
   
