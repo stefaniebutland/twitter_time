@@ -3,4 +3,4 @@ novice analysis in R of rOpenSci twitter data
 
 [View report](https://stefaniebutland.github.io/twitter_time/tweets_ropensci.html)
 
-[Report in R Markdown](tweets_ropensci.Rmd)
+[Report in R Markdown](https://stefaniebutland.github.io/twitter_time/tweets_ropensci.Rmd)
